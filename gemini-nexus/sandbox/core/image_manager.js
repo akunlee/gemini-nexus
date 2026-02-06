@@ -253,6 +253,25 @@ export class ImageManager {
             
             // Content
             if (file.type && file.type.startsWith('image/')) {
+                item.classList.add('is-image');
+                item.setAttribute('role', 'button');
+                item.setAttribute('tabindex', '0');
+                item.setAttribute('aria-label', file.name ? `Preview ${file.name}` : 'Preview image');
+                
+                const openPreview = () => {
+                    if (file.base64) {
+                        document.dispatchEvent(new CustomEvent('gemini-view-image', { detail: file.base64 }));
+                    }
+                };
+                
+                item.addEventListener('click', () => openPreview());
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openPreview();
+                    }
+                });
+
                 const img = document.createElement('img');
                 img.src = file.base64;
                 item.appendChild(img);

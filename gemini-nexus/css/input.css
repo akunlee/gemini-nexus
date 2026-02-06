@@ -276,6 +276,15 @@ body.layout-wide .tools-container {
     overflow: hidden;
 }
 
+.preview-item.is-image {
+    cursor: zoom-in;
+}
+
+.preview-item.is-image:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
 .preview-item img {
     width: 100%;
     height: 100%;
